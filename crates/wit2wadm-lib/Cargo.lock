@@ -197,7 +197,6 @@ checksum = "673aac59facbab8a9007c7f6108d11f63b603f7cabff99fabf650fea5c32b861"
 [[package]]
 name = "wadm"
 version = "0.11.0"
-source = "git+https://github.com/wasmcloud/wadm?branch=feat/gate-by-feature-flag#9cc471d1063287de5d5e27bb4f7ef98ac88d1ded"
 dependencies = [
  "indexmap",
  "serde",
@@ -409,15 +408,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "wit2wadm"
-version = "0.1.0"
-dependencies = [
- "wit-bindgen",
- "wit-parser 0.205.0",
- "wit2wadm-lib",
-]
-
-[[package]]
 name = "wit2wadm-lib"
 version = "0.1.0"
 dependencies = [
@@ -425,6 +415,7 @@ dependencies = [
  "serde_yaml",
  "wadm",
  "wasmparser 0.205.0",
+ "wit-bindgen",
  "wit-component 0.205.0",
  "wit-parser 0.205.0",
 ]

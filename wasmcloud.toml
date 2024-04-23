@@ -1,6 +1,5 @@
-name = "echo"
+name = "wit2wadm"
 language = "rust"
-version = "v0.1.0"
 type = "component"
 
 [component]

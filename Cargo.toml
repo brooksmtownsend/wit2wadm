@@ -3,12 +3,23 @@ name = "wit2wadm"
 version = "0.1.0"
 edition = "2021"
 
+[workspace]
+members = ["crates/wit2wadm-lib"]
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[[bin]]
+name = "wit2wadm"
+path = "bin/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-anyhow = "1.0.82"
-serde_yaml = "0.9.34"
-wadm = "0.11.0"
-wasmparser = "0.205.0"
-wit-component = "0.205.0"
+[workspace.dependencies]
 wit-parser = "0.205.0"
+
+[dependencies]
+wit2wadm-lib = { path = "./crates/wit2wadm-lib" }
+wit-bindgen = "0.24.0"
+wit-parser = { workspace = true }

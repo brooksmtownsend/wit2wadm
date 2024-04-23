@@ -1,0 +1,18 @@
+[package]
+name = "wit2wadm-lib"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["lib"]
+path = "src/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.82"
+serde_yaml = "0.9.34"
+wadm = { version = "0.11.0", default-features = false, git = "https://github.com/wasmcloud/wadm", branch = "feat/gate-by-feature-flag"}
+wasmparser = "0.205.0"
+wit-component = "0.205.0"
+wit-parser = { workspace = true }

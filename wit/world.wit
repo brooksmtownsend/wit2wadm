@@ -1,8 +1,9 @@
-package wasmcloud:hello;
+package wasmcloud:tools;
 
-world hello {
-  import wasi:logging/logging;
-  import wasi:keyvalue/atomics@0.2.0-draft;
-  import wasi:keyvalue/store@0.2.0-draft;
-  import wasmcloud:messaging/consumer@0.2.0;
+interface convert {
+  component-to-wadm: func(component: list<u8>) -> result<string, string>;
+}
+
+world wit2wadm {
+  export convert;
 }
