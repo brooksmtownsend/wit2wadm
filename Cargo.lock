@@ -412,21 +412,21 @@ dependencies = [
 name = "wit2wadm"
 version = "0.1.0"
 dependencies = [
- "serde_yaml",
- "wit-bindgen",
- "wit-component 0.205.0",
- "wit-parser 0.205.0",
- "wit2wadm-lib",
-]
-
-[[package]]
-name = "wit2wadm-lib"
-version = "0.1.0"
-dependencies = [
  "anyhow",
  "serde_yaml",
  "wadm",
  "wasmparser 0.205.0",
  "wit-component 0.205.0",
  "wit-parser 0.205.0",
+]
+
+[[package]]
+name = "wit2wadm-cli"
+version = "0.1.0"
+dependencies = [
+ "serde_yaml",
+ "wit-bindgen",
+ "wit-component 0.205.0",
+ "wit-parser 0.205.0",
+ "wit2wadm",
 ]

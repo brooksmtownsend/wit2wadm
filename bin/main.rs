@@ -1,4 +1,4 @@
-use wit2wadm_lib::convert::wit2wadm;
+use wit2wadm::convert::wit2wadm;
 use wit_parser::Resolve;
 
 fn main() {

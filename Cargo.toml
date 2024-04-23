@@ -1,10 +1,10 @@
 [package]
-name = "wit2wadm"
+name = "wit2wadm-cli"
 version = "0.1.0"
 edition = "2021"
 
 [workspace]
-members = ["crates/wit2wadm-lib"]
+members = ["crates/wit2wadm"]
 
 [lib]
 name = "wit2wadm_component"
@@ -21,7 +21,7 @@ path = "bin/main.rs"
 wit-parser = "0.205.0"
 
 [dependencies]
-wit2wadm-lib = { path = "./crates/wit2wadm-lib" }
+wit2wadm = { path = "./crates/wit2wadm" }
 wit-bindgen = "0.24.0"
 wit-parser = { workspace = true }
 wit-component = "0.205.0"

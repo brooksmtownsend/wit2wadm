@@ -1,5 +1,5 @@
 [package]
-name = "wit2wadm-lib"
+name = "wit2wadm"
 version = "0.1.0"
 edition = "2021"
 

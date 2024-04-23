@@ -18,7 +18,7 @@ impl exports::wasmcloud::tools::convert::Guest for Wit2WadmComponent {
         };
 
         // TODO: accept world ID
-        let manifest = wit2wadm_lib::convert::wit2wadm(resolve, "root")
+        let manifest = wit2wadm::convert::wit2wadm(resolve, "root")
             .expect("should be able to convert to manifest");
         let yaml_result = serde_yaml::to_string(&manifest);
         match yaml_result {
