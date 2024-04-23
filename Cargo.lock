@@ -412,7 +412,9 @@ dependencies = [
 name = "wit2wadm"
 version = "0.1.0"
 dependencies = [
+ "serde_yaml",
  "wit-bindgen",
+ "wit-component 0.205.0",
  "wit-parser 0.205.0",
  "wit2wadm-lib",
 ]

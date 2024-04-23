@@ -1,10 +1,11 @@
 use anyhow::Context as _;
+use wadm::model::Manifest;
 use wit_parser::Resolve;
 
 use crate::manifest;
 
 /// Converts a component [Resolve] and world name into a wadm application manifest
-pub fn wit2wadm(resolve: Resolve, world_name: &str) {
+pub fn wit2wadm(resolve: Resolve, world_name: &str) -> anyhow::Result<Manifest> {
     let wit_parser::World {
         exports, imports, ..
     } = resolve
@@ -31,9 +32,11 @@ pub fn wit2wadm(resolve: Resolve, world_name: &str) {
     );
 
     // Print the manifest as YAML
-    let yaml_result = serde_yaml::to_string(&manifest);
-    match yaml_result {
-        Ok(yaml_string) => println!("{}", yaml_string),
-        Err(err) => eprintln!("Error serializing to YAML: {}", err),
-    }
+    // let yaml_result = serde_yaml::to_string(&manifest);
+    // match yaml_result {
+    //     Ok(yaml_string) => println!("{}", yaml_string),
+    //     Err(err) => eprintln!("Error serializing to YAML: {}", err),
+    // }
+
+    Ok(manifest)
 }

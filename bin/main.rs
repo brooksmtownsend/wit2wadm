@@ -13,5 +13,10 @@ fn main() {
         .push_path(wit_folder)
         .expect("should be able to load wits");
 
-    wit2wadm(resolve, world_name)
+    let manifest = wit2wadm(resolve, world_name).expect("should be able to convert to manifest");
+    let yaml_result = serde_yaml::to_string(&manifest);
+    match yaml_result {
+        Ok(yaml_string) => println!("{}", yaml_string),
+        Err(err) => eprintln!("Error serializing to YAML: {}", err),
+    }
 }
