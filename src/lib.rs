@@ -1,10 +1,13 @@
 // lib.rs
+#[cfg(target_arch = "wasm32")]
 wit_bindgen::generate!();
 
 // use crate::exports::wasmcloud::tools::convert::KnownInterface;
 
+#[cfg(target_arch = "wasm32")]
 struct Wit2WadmComponent;
 
+#[cfg(target_arch = "wasm32")]
 impl exports::wasmcloud::tools::convert::Guest for Wit2WadmComponent {
     fn component_to_wadm(component: Vec<u8>) -> Result<String, String> {
         let (resolve, _world) = match wit_component::decode(&component) {
@@ -25,4 +28,5 @@ impl exports::wasmcloud::tools::convert::Guest for Wit2WadmComponent {
     }
 }
 
+#[cfg(target_arch = "wasm32")]
 export!(Wit2WadmComponent);
