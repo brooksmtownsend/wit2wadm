@@ -1,0 +1,7 @@
+name = "echo"
+language = "rust"
+version = "v0.1.0"
+type = "component"
+
+[component]
+wasm_target = "wasm32-wasi-preview2"

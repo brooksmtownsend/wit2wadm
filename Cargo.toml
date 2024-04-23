@@ -1,0 +1,14 @@
+[package]
+name = "wit2wadm"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.82"
+serde_yaml = "0.9.34"
+wadm = "0.11.0"
+wasmparser = "0.205.0"
+wit-component = "0.205.0"
+wit-parser = "0.205.0"
