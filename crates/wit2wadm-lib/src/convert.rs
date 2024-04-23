@@ -19,8 +19,8 @@ pub fn wit2wadm(resolve: Resolve, world_name: &str) -> anyhow::Result<Manifest> 
         // TODO: un-hardcode these values
         "appname",
         "appdesc",
-        "appversion",
         "appimage",
+        "v0.0.1",
         imports
             .iter()
             .map(|(id, _)| resolve.name_world_key(id))

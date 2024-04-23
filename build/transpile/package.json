@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@bytecodealliance/preview2-shim": "^0.16.1"
+  }
+}

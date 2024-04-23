@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload Interface</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e9eff1;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #333;
+      }
+
+      #drop-area {
+        border: 2px dashed #009688;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 600px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        background-color: #ffffff;
+        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      #drop-area.highlight {
+        border-color: #00bcd4;
+        background-color: #f0f0f0;
+      }
+
+      #drop-area p {
+        margin: 10px 0 0;
+        font-size: 16px;
+      }
+
+      #file-info {
+        padding-left: 20px;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .file-detail {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+      }
+
+      .file-detail i {
+        margin-right: 10px;
+        color: #009688;
+      }
+
+      .file-name {
+        font-weight: bold;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "@bytecodealliance/preview2-shim/cli": "./transpile/node_modules/@bytecodealliance/preview2-shim/lib/browser/cli.js",
+          "@bytecodealliance/preview2-shim/clocks": "./transpile/node_modules/@bytecodealliance/preview2-shim/lib/browser/clocks.js",
+          "@bytecodealliance/preview2-shim/filesystem": "./transpile/node_modules/@bytecodealliance/preview2-shim/lib/browser/filesystem.js",
+          "@bytecodealliance/preview2-shim/http": "./transpile/node_modules/@bytecodealliance/preview2-shim/lib/browser/http.js",
+          "@bytecodealliance/preview2-shim/io": "./transpile/node_modules/@bytecodealliance/preview2-shim/lib/browser/io.js",
+          "@bytecodealliance/preview2-shim/random": "./transpile/node_modules/@bytecodealliance/preview2-shim/lib/browser/random.js",
+          "@bytecodealliance/preview2-shim/sockets": "./transpile/node_modules/@bytecodealliance/preview2-shim/lib/browser/sockets.js"
+        }
+      }
+    </script>
+    <script type="module" src="index.js"></script>
+  </head>
+  <body>
+    <div id="drop-area">
+      <p>Drag & drop a file here or click to select a file</p>
+      <input type="file" style="display: none" accept=".wasm" />
+    </div>
+    <div id="file-info"></div>
+  </body>
+</html>
