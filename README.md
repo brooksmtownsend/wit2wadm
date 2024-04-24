@@ -34,3 +34,5 @@ You can build a component that is capable of interpreting a WebAssembly componen
 Packaged in the [docs](./docs/) directory is a basic user interface that allows you to drag-and-drop a WebAssembly component and execute the `wit2wasm` component in the browser.
 
 In order to run the UI, simply execute the script or the commands contained in [`./ui.sh`](./ui.sh). You will need [wash](https://wasmcloud.com/docs/installation), [jco](https://github.com/bytecodealliance/jco), and a Python3 installation to run the script.
+
+You can also access this application at any time at [https://brooksmtownsend.github.io/wit2wadm/](https://brooksmtownsend.github.io/wit2wadm/)
