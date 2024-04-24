@@ -1,8 +1,9 @@
 use std::collections::BTreeMap;
 
 use wadm::model::{
-    Component, ComponentProperties, Manifest, Metadata, Properties, Specification, Trait,
-    TraitProperty, APPLICATION_KIND, LINK_TRAIT, OAM_VERSION,
+    Component, ComponentProperties, Manifest, Metadata, Properties, Specification,
+    SpreadScalerProperty, Trait, TraitProperty, APPLICATION_KIND, LINK_TRAIT, OAM_VERSION,
+    SPREADSCALER_TRAIT,
 };
 
 use crate::interface::{self, combine_interfaces, DirectionalInterface};
@@ -103,11 +104,46 @@ fn manifest_for_component<'a>(
         .iter()
         .filter_map(|import| import.to_capability_component());
 
-    component.traits = Some(link_properties);
+    let exports_for_manifest = combine_interfaces(
+        exports
+            .iter()
+            .filter_map(|export| {
+                DirectionalInterface::parse_for_manifest(export, interface::Direction::Export)
+            })
+            .collect::<Vec<_>>(),
+    );
+
+    let export_components = exports_for_manifest.iter().filter_map(|export| {
+        // When a component has an export, it's a different provider component in the manifest that will link to the component
+        // so we can simply generate the link and then create a new component with that link
+        export
+            .to_source_link_property(&name)
+            .map(|link| {
+                export.to_capability_component().map(|component| Component {
+                    traits: Some(vec![Trait {
+                        trait_type: LINK_TRAIT.to_string(),
+                        properties: TraitProperty::Link(link),
+                    }]),
+                    ..component
+                })
+            })
+            .flatten()
+    });
+
+    // Ensure the component has a spreadscaler trait
+    let mut traits = vec![Trait {
+        trait_type: SPREADSCALER_TRAIT.to_string(),
+        properties: TraitProperty::SpreadScaler(SpreadScalerProperty {
+            instances: 1,
+            spread: vec![],
+        }),
+    }];
+    traits.extend(link_properties);
+    component.traits = Some(traits);
 
     let mut out_vec = Vec::new();
     out_vec.push(component);
-    out_vec.extend(provider_components);
+    out_vec.extend(provider_components.chain(export_components));
 
     out_vec
 }

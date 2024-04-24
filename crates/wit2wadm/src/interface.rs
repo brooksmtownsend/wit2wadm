@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use wadm::model::LinkProperty;
+use wadm::model::{CapabilityProperties, Component, LinkProperty, Properties};
 
 #[derive(Clone, Copy, Hash, Eq, PartialEq)]
 /// The direction of an interface, either import or export
@@ -199,10 +199,10 @@ impl<'a> CombinedInterface<'a> {
         }
     }
 
-    pub fn to_capability_component(&self) -> Option<wadm::model::Component> {
-        self.capability_image().map(|image| wadm::model::Component {
-            properties: wadm::model::Properties::Capability {
-                properties: wadm::model::CapabilityProperties {
+    pub fn to_capability_component(&self) -> Option<Component> {
+        self.capability_image().map(|image| Component {
+            properties: Properties::Capability {
+                properties: CapabilityProperties {
                     image,
                     id: None,
                     config: Vec::new(),
@@ -213,7 +213,14 @@ impl<'a> CombinedInterface<'a> {
         })
     }
 
-    pub fn to_target_link_property(&self) -> Option<wadm::model::LinkProperty> {
+    pub fn to_source_link_property(&self, target: &str) -> Option<LinkProperty> {
+        self.to_target_link_property().map(|link| LinkProperty {
+            target: target.to_string(),
+            ..link
+        })
+    }
+
+    pub fn to_target_link_property(&self) -> Option<LinkProperty> {
         match (self.namespace, self.package) {
             // These interfaces are handled automatically in the host and do not have
             // associated mages
