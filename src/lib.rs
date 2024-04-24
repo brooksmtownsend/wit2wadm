@@ -34,9 +34,8 @@ impl exports::wasmcloud::tools::convert::Guest for Wit2WadmComponent {
 
         let (name, description, version, image) =
             resolve_empty_strings(name, description, version, image);
-        let manifest =
-            wit2wadm::convert::wit2wadm(resolve, &world, &name, &description, &version, &image)
-                .expect("should be able to convert to manifest");
+        let manifest = wit2wadm::wit2wadm(resolve, &world, &name, &description, &version, &image)
+            .expect("should be able to convert to manifest");
 
         let yaml_result = serde_yaml::to_string(&manifest);
         match yaml_result {

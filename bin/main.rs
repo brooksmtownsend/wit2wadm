@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use anyhow::Context as _;
 use clap::Parser;
-use wit2wadm::convert::{wit2wadm_from_component, wit2wadm_from_folder};
+use wit2wadm::{wit2wadm_from_component, wit2wadm_from_folder};
 
 #[derive(Parser)]
 #[clap(author = "wasmCloud", arg_required_else_help = true)]
