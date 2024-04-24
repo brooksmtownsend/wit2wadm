@@ -46,6 +46,7 @@ impl exports::wasmcloud::tools::convert::Guest for Wit2WadmComponent {
     }
 }
 
+#[cfg(target_arch = "wasm32")]
 fn resolve_empty_strings(
     name: String,
     description: String,

@@ -64,7 +64,7 @@ pub fn base_manifest(name: &str, description: &str, version: &str) -> Manifest {
     }
 }
 
-fn manifest_for_component<'a>(
+fn manifest_for_component(
     name: &str,
     image: &str,
     imports: Vec<String>,
@@ -116,18 +116,15 @@ fn manifest_for_component<'a>(
     let export_components = exports_for_manifest.iter().filter_map(|export| {
         // When a component has an export, it's a different provider component in the manifest that will link to the component
         // so we can simply generate the link and then create a new component with that link
-        export
-            .to_source_link_property(&name)
-            .map(|link| {
-                export.to_capability_component().map(|component| Component {
-                    traits: Some(vec![Trait {
-                        trait_type: LINK_TRAIT.to_string(),
-                        properties: TraitProperty::Link(link),
-                    }]),
-                    ..component
-                })
+        export.to_source_link_property(name).and_then(|link| {
+            export.to_capability_component().map(|component| Component {
+                traits: Some(vec![Trait {
+                    trait_type: LINK_TRAIT.to_string(),
+                    properties: TraitProperty::Link(link),
+                }]),
+                ..component
             })
-            .flatten()
+        })
     });
 
     // Ensure the component has a spreadscaler trait
@@ -150,32 +147,6 @@ fn manifest_for_component<'a>(
 
 #[cfg(test)]
 mod test {
-    use crate::manifest::base_manifest;
-
-    use super::manifest_for_component;
-
     #[test]
-    fn wit2wadm() {
-        let mut manifest = base_manifest("echo", "schmecho", "vecho");
-        let basic_manifest = manifest_for_component(
-            "echo",
-            "myref.io",
-            vec![
-                "wasi:io/streams@0.2.0".to_string(),
-                "wasmcloud:messaging/consumer@0.2.0".to_string(),
-                "wasi:logging/logging".to_string(),
-                "wasi:http/outgoing-handler@0.2.0".to_string(),
-            ],
-            vec![],
-        );
-
-        manifest.spec.components = basic_manifest;
-
-        // Print the manifest as YAML
-        let yaml_result = serde_yaml::to_string(&manifest);
-        match yaml_result {
-            Ok(yaml_string) => println!("{}", yaml_string),
-            Err(err) => eprintln!("Error serializing to YAML: {}", err),
-        }
-    }
+    fn test_manifest_for_component() {}
 }

@@ -45,7 +45,7 @@ fn main() {
             .expect("world name is required when providing a WIT folder");
         wit2wadm_from_folder(
             &args.wit_folder_or_component,
-            &world_name,
+            world_name,
             &name,
             description,
             &version,

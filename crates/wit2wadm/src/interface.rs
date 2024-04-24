@@ -53,7 +53,7 @@ pub fn combine_interfaces(interfaces: Vec<DirectionalInterface>) -> Vec<Combined
         );
         interface_map
             .entry(key)
-            .or_insert_with(Vec::new)
+            .or_default()
             .push(interface.interface);
     }
 

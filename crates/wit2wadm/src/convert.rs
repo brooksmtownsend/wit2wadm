@@ -28,15 +28,8 @@ pub fn wit2wadm_from_folder(
         .context("component world missing")
         .expect("should be able to find component world");
 
-    let manifest = wit2wadm(
-        resolve,
-        &world,
-        name.as_ref(),
-        description.as_ref(),
-        version.as_ref(),
-        image.as_ref(),
-    )
-    .context("should be able to convert to manifest")?;
+    let manifest = wit2wadm(resolve, &world, name, description, version, image)
+        .context("should be able to convert to manifest")?;
 
     Ok(manifest)
 }
@@ -66,15 +59,8 @@ pub fn wit2wadm_from_component(
         .context("component world missing")
         .expect("should be able to find component world");
 
-    let manifest = wit2wadm(
-        resolve,
-        &world,
-        name.as_ref(),
-        description.as_ref(),
-        version.as_ref(),
-        image.as_ref(),
-    )
-    .context("should be able to convert to manifest")?;
+    let manifest = wit2wadm(resolve, &world, name, description, version, image)
+        .context("should be able to convert to manifest")?;
 
     Ok(manifest)
 }
@@ -83,20 +69,20 @@ pub fn wit2wadm_from_component(
 pub fn wit2wadm(
     resolve: Resolve,
     world: &World,
-    name: &str,
-    description: &str,
-    version: &str,
-    image: &str,
+    name: impl AsRef<str>,
+    description: impl AsRef<str>,
+    version: impl AsRef<str>,
+    image: impl AsRef<str>,
 ) -> anyhow::Result<Manifest> {
     let wit_parser::World {
         exports, imports, ..
     } = world;
 
     let manifest = manifest::create_manifest(
-        name,
-        description,
-        version,
-        image,
+        name.as_ref(),
+        description.as_ref(),
+        version.as_ref(),
+        image.as_ref(),
         imports
             .iter()
             .map(|(id, _)| resolve.name_world_key(id))
@@ -106,13 +92,6 @@ pub fn wit2wadm(
             .map(|(id, _)| resolve.name_world_key(id))
             .collect(),
     );
-
-    // Print the manifest as YAML
-    // let yaml_result = serde_yaml::to_string(&manifest);
-    // match yaml_result {
-    //     Ok(yaml_string) => println!("{}", yaml_string),
-    //     Err(err) => eprintln!("Error serializing to YAML: {}", err),
-    // }
 
     Ok(manifest)
 }
