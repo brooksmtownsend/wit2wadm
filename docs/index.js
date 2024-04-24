@@ -36,8 +36,18 @@ function displayFileInfo(file) {
     reader.readAsArrayBuffer(file);
 
     reader.onload = function (event) {
+      const name = document.getElementById("name").value;
+      const description = document.getElementById("description").value;
+      const version = document.getElementById("version").value;
+      const image = document.getElementById("image").value;
       const arrayBuffer = event.target.result;
-      const manifest = convert.componentToWadm(arrayBuffer); // Process the ArrayBuffer with your module function
+      const manifest = convert.componentToWadm(
+        arrayBuffer,
+        name,
+        description,
+        version,
+        image
+      ); // Process the ArrayBuffer with your module function
       displayYAML(manifest);
     };
   }
@@ -53,9 +63,9 @@ function setupEventListeners() {
 function displayYAML(yamlString) {
   const fileInfoElement = document.getElementById("file-info");
   // Now just updating the code part, button stays intact
-  fileInfoElement.innerHTML = `<button id="copy-button">Copy YAML</button><pre><code class="language-yaml">${escapeHTML(
+  fileInfoElement.innerHTML = `<pre><code class="language-yaml">${escapeHTML(
     yamlString
-  )}</code></pre>`;
+  )}</code></pre><button id="copy-button">Copy Manifest to Clipboard</button>`;
   setupEventListeners(); // Set up event listeners after updating HTML
   Prism.highlightAll();
 }

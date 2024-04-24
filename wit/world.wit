@@ -14,7 +14,7 @@ interface convert {
     image-ref: string,
   }
 
-  component-to-wadm: func(component: list<u8>) -> result<string, string>;
+  component-to-wadm: func(component: list<u8>, name: string, version: string, description: string, image: string) -> result<string, string>;
 }
 
 world wit2wadm {

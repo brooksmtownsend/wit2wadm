@@ -1660,32 +1660,40 @@ function trampoline3(handle) {
   }
 }
 
-function componentToWadm(arg0) {
+function componentToWadm(arg0, arg1, arg2, arg3, arg4) {
   var val0 = arg0;
   var len0 = val0.byteLength;
   var ptr0 = realloc1(0, 0, 1, len0 * 1);
   var src0 = new Uint8Array(val0.buffer || val0, val0.byteOffset, len0 * 1);
   (new Uint8Array(memory0.buffer, ptr0, len0 * 1)).set(src0);
-  const ret = exports1['wasmcloud:tools/convert#component-to-wadm'](ptr0, len0);
-  let variant3;
+  var ptr1 = utf8Encode(arg1, realloc1, memory0);
+  var len1 = utf8EncodedLen;
+  var ptr2 = utf8Encode(arg2, realloc1, memory0);
+  var len2 = utf8EncodedLen;
+  var ptr3 = utf8Encode(arg3, realloc1, memory0);
+  var len3 = utf8EncodedLen;
+  var ptr4 = utf8Encode(arg4, realloc1, memory0);
+  var len4 = utf8EncodedLen;
+  const ret = exports1['wasmcloud:tools/convert#component-to-wadm'](ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, ptr4, len4);
+  let variant7;
   switch (dataView(memory0).getUint8(ret + 0, true)) {
     case 0: {
-      var ptr1 = dataView(memory0).getInt32(ret + 4, true);
-      var len1 = dataView(memory0).getInt32(ret + 8, true);
-      var result1 = utf8Decoder.decode(new Uint8Array(memory0.buffer, ptr1, len1));
-      variant3= {
+      var ptr5 = dataView(memory0).getInt32(ret + 4, true);
+      var len5 = dataView(memory0).getInt32(ret + 8, true);
+      var result5 = utf8Decoder.decode(new Uint8Array(memory0.buffer, ptr5, len5));
+      variant7= {
         tag: 'ok',
-        val: result1
+        val: result5
       };
       break;
     }
     case 1: {
-      var ptr2 = dataView(memory0).getInt32(ret + 4, true);
-      var len2 = dataView(memory0).getInt32(ret + 8, true);
-      var result2 = utf8Decoder.decode(new Uint8Array(memory0.buffer, ptr2, len2));
-      variant3= {
+      var ptr6 = dataView(memory0).getInt32(ret + 4, true);
+      var len6 = dataView(memory0).getInt32(ret + 8, true);
+      var result6 = utf8Decoder.decode(new Uint8Array(memory0.buffer, ptr6, len6));
+      variant7= {
         tag: 'err',
-        val: result2
+        val: result6
       };
       break;
     }
@@ -1694,10 +1702,10 @@ function componentToWadm(arg0) {
     }
   }
   postReturn0(ret);
-  if (variant3.tag === 'err') {
-    throw new ComponentError(variant3.val);
+  if (variant7.tag === 'err') {
+    throw new ComponentError(variant7.val);
   }
-  return variant3.val;
+  return variant7.val;
 }
 
 const $init = (async() => {

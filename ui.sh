@@ -19,5 +19,5 @@ if ! [ -x "$(command -v python3)" ]; then
 fi
 
 wash build
-jco transpile ./docs/wit2wadm_component.wasm -o ./docs/transpile --no-typescript
+jco transpile ./build/wit2wadm_component.wasm -o ./docs/transpile --no-typescript
 python3 -m http.server -d docs

@@ -40,55 +40,69 @@
       }
 
       #drop-area {
-        border: 2px dashed #009688;
+        border: 2px dashed #00bc8e;
         border-radius: 10px;
-        width: 80%;
-        max-width: 600px;
-        height: 200px;
+        width: 100%;
+        height: auto;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        background-color: #ffffff;
-        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        background-color: #fff;
         padding: 20px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
       }
 
       #drop-area.highlight {
-        border-color: #00bcd4;
-        background-color: #f0f0f0;
-      }
-
-      #drop-area p {
-        margin: 10px 0 0;
-        font-size: 16px;
+        border-color: #00bc8e;
       }
 
       #file-info {
-        padding-left: 20px;
         margin-top: 20px;
         text-align: center;
-        font-size: 16px;
+        padding-left: 250px;
+        color: #d9e1e2;
+        font-size: 14px;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .input-group {
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-right: 10px;
       }
 
-      .file-detail {
-        display: flex;
-        align-items: center;
-        margin: 5px 0;
+      .input-group input {
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #00bc8e;
+        border-radius: 5px;
+        box-sizing: border-box;
       }
 
-      .file-detail i {
-        margin-right: 10px;
-        color: #009688;
+      .input-group #drop-area {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        background-color: transparent;
+        cursor: pointer;
       }
 
-      .file-name {
-        font-weight: bold;
+      #wasmcloud-logo {
+        position: absolute;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        bottom: 0;
+        left: 0;
+        width: 25%;
       }
     </style>
     <script type="importmap">
@@ -107,11 +121,20 @@
     <script type="module" src="index.js"></script>
   </head>
   <body>
-    <div id="drop-area">
-      <p>Drag & drop a file here or click to select a file</p>
-      <input type="file" style="display: none" accept=".wasm" />
+    <div class="input-group">
+      <h1>wit2wadm</h1>
+      <input type="text" id="name" placeholder="Name" />
+      <input type="text" id="description" placeholder="Description" />
+      <input type="text" id="version" placeholder="Version" />
+      <input type="text" id="image" placeholder="Image" />
+      <div id="drop-area">
+        <p>Drag & drop a file here or click to select a file</p>
+        <input type="file" style="display: none" accept=".wasm" />
+      </div>
     </div>
+
     <div id="file-info"></div>
+    <img id="wasmcloud-logo" alt="wasmCloud logo" src="./wasmcloud.png" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-yaml.min.js"></script>
   </body>

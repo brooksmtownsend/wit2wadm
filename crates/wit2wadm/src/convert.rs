@@ -9,6 +9,10 @@ use crate::manifest;
 pub fn wit2wadm_from_folder(
     wit_folder: impl AsRef<Path>,
     world_name: impl AsRef<str>,
+    name: impl AsRef<str>,
+    description: impl AsRef<str>,
+    version: impl AsRef<str>,
+    image: impl AsRef<str>,
 ) -> anyhow::Result<Manifest> {
     let mut resolve = Resolve::new();
 
@@ -24,13 +28,27 @@ pub fn wit2wadm_from_folder(
         .context("component world missing")
         .expect("should be able to find component world");
 
-    let manifest = wit2wadm(resolve, &world).context("should be able to convert to manifest")?;
+    let manifest = wit2wadm(
+        resolve,
+        &world,
+        name.as_ref(),
+        description.as_ref(),
+        version.as_ref(),
+        image.as_ref(),
+    )
+    .context("should be able to convert to manifest")?;
 
     Ok(manifest)
 }
 
 /// Loads a WIT component from a file and converts it to a wadm application manifest
-pub fn wit2wadm_from_component(wit_component: impl AsRef<Path>) -> anyhow::Result<Manifest> {
+pub fn wit2wadm_from_component(
+    wit_component: impl AsRef<Path>,
+    name: impl AsRef<str>,
+    description: impl AsRef<str>,
+    version: impl AsRef<str>,
+    image: impl AsRef<str>,
+) -> anyhow::Result<Manifest> {
     let wasm = std::fs::read(&wit_component).context("failed to read WIT component")?;
     let (resolve, world) =
         match wit_component::decode(&wasm).context("failed to decode WIT component")? {
@@ -48,23 +66,37 @@ pub fn wit2wadm_from_component(wit_component: impl AsRef<Path>) -> anyhow::Resul
         .context("component world missing")
         .expect("should be able to find component world");
 
-    let manifest = wit2wadm(resolve, &world).context("should be able to convert to manifest")?;
+    let manifest = wit2wadm(
+        resolve,
+        &world,
+        name.as_ref(),
+        description.as_ref(),
+        version.as_ref(),
+        image.as_ref(),
+    )
+    .context("should be able to convert to manifest")?;
 
     Ok(manifest)
 }
 
 /// Converts a component [Resolve] and [World] into a wadm application manifest
-pub fn wit2wadm(resolve: Resolve, world: &World) -> anyhow::Result<Manifest> {
+pub fn wit2wadm(
+    resolve: Resolve,
+    world: &World,
+    name: &str,
+    description: &str,
+    version: &str,
+    image: &str,
+) -> anyhow::Result<Manifest> {
     let wit_parser::World {
         exports, imports, ..
     } = world;
 
     let manifest = manifest::create_manifest(
-        // TODO: un-hardcode these values
-        "appname",
-        "appdesc",
-        "appimage",
-        "v0.0.1",
+        name,
+        description,
+        version,
+        image,
         imports
             .iter()
             .map(|(id, _)| resolve.name_world_key(id))
