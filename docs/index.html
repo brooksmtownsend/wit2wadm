@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>File Upload Interface</title>
+    <title>wit2wadm</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
       rel="stylesheet"
     />
     <style>
@@ -19,6 +23,20 @@
         align-items: center;
         height: 100vh;
         color: #333;
+      }
+
+      button {
+        background-color: #009688;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
       }
 
       #drop-area {
@@ -94,5 +112,7 @@
       <input type="file" style="display: none" accept=".wasm" />
     </div>
     <div id="file-info"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-yaml.min.js"></script>
   </body>
 </html>

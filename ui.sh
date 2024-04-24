@@ -20,4 +20,4 @@ fi
 
 wash build
 jco transpile ./docs/wit2wadm_component.wasm -o ./docs/transpile --no-typescript
-python3 -m http.server -d build
+python3 -m http.server -d docs

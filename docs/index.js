@@ -32,27 +32,50 @@ function fileOnChangeHandler(event) {
 
 function displayFileInfo(file) {
   if (file) {
-    const fileInfoElement = document.getElementById("file-info");
-    fileInfoElement.innerHTML = "";
-
-    const fileNameDiv = document.createElement("div");
-    fileNameDiv.className = "file-detail";
-    fileNameDiv.innerHTML = `<i class="fas fa-file-alt"></i><span class="file-name">${file.name}</span>`;
-
-    const fileSizeDiv = document.createElement("div");
-    fileSizeDiv.className = "file-detail";
-    fileSizeDiv.innerHTML = `<i class="fas fa-weight-hanging"></i> Size: ${file.size} bytes`;
-
-    fileInfoElement.appendChild(fileNameDiv);
-    fileInfoElement.appendChild(fileSizeDiv);
-
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
 
     reader.onload = function (event) {
       const arrayBuffer = event.target.result;
       const manifest = convert.componentToWadm(arrayBuffer); // Process the ArrayBuffer with your module function
-      console.dir(manifest);
+      displayYAML(manifest);
     };
   }
+}
+
+function setupEventListeners() {
+  const copyButton = document.getElementById("copy-button");
+  if (copyButton) {
+    copyButton.addEventListener("click", copyToClipboard);
+  }
+}
+
+function displayYAML(yamlString) {
+  const fileInfoElement = document.getElementById("file-info");
+  // Now just updating the code part, button stays intact
+  fileInfoElement.innerHTML = `<button id="copy-button">Copy YAML</button><pre><code class="language-yaml">${escapeHTML(
+    yamlString
+  )}</code></pre>`;
+  setupEventListeners(); // Set up event listeners after updating HTML
+  Prism.highlightAll();
+}
+
+function copyToClipboard() {
+  const yamlText = document.querySelector("#file-info code").innerText;
+  navigator.clipboard
+    .writeText(yamlText)
+    .then(() => {
+      console.log("YAML copied to clipboard!");
+    })
+    .catch((err) => {
+      console.error("Failed to copy YAML: ", err);
+      alert("Failed to copy YAML.");
+    });
+}
+
+function escapeHTML(html) {
+  var text = document.createTextNode(html);
+  var p = document.createElement("p");
+  p.appendChild(text);
+  return p.innerHTML;
 }
