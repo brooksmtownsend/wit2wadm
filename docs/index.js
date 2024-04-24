@@ -34,12 +34,15 @@ function displayFileInfo(file) {
   if (file) {
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
+    console.dir(file);
 
     reader.onload = function (event) {
       const name = document.getElementById("name").value;
       const description = document.getElementById("description").value;
-      const version = document.getElementById("version").value;
-      const image = document.getElementById("image").value;
+      const version = document.getElementById("version").value || "v0.1.0";
+      const image =
+        document.getElementById("image").value ||
+        "file:///path/to/" + file.name;
       const arrayBuffer = event.target.result;
       const manifest = convert.componentToWadm(
         arrayBuffer,

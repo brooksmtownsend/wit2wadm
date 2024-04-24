@@ -112,6 +112,7 @@ impl<'a> DirectionalInterface<'a> {
             // These interfaces are handled automatically in the host and do not need to be
             // included in the manifest
             "wasi:logging/logging"
+            | "wasi:random/random@0.2.0"
             | "wasi:http/types@0.2.0"
             | "wasmcloud:messaging/types@0.2.0"
             | "wasi:blobstore/types@0.2.0-draft"
@@ -175,6 +176,7 @@ impl<'a> CombinedInterface<'a> {
             ("wasi", "http", _)
             | ("wasi", "blobstore", _)
             | ("wasi", "http", _)
+            | ("wasi", "random", _)
             | ("wasmcloud", "messaging", _)
                 if self.interfaces == vec!["types"] =>
             {
@@ -195,7 +197,13 @@ impl<'a> CombinedInterface<'a> {
             ("wasmcloud", "messaging", _) => {
                 Some("ghcr.io/wasmcloud/messaging-nats:canary".to_string())
             }
-            _ => None,
+            (namespace, package, _) => Some(format!(
+                "REGISTRY-IMAGE/{}-{}-{}:{}",
+                namespace,
+                package,
+                self.direction.as_str(),
+                self.version.unwrap_or("latest")
+            )),
         }
     }
 
@@ -235,6 +243,7 @@ impl<'a> CombinedInterface<'a> {
             ("wasi", "http")
             | ("wasi", "blobstore")
             | ("wasi", "http")
+            | ("wasi", "random")
             | ("wasmcloud", "messaging")
                 if self.interfaces == vec!["types"] =>
             {

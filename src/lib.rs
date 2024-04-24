@@ -53,12 +53,12 @@ fn resolve_empty_strings(
     image: String,
 ) -> (String, String, String, String) {
     let name = if name.is_empty() {
-        "APPLICATION NAME".to_string()
+        "APPLICATION_NAME".to_string()
     } else {
         name
     };
     let description = if description.is_empty() {
-        "APPLICATION DESCRIPTION".to_string()
+        "APPLICATION_DESCRIPTION".to_string()
     } else {
         description
     };
@@ -68,7 +68,7 @@ fn resolve_empty_strings(
         version
     };
     let image = if image.is_empty() {
-        "APPLICATION IMAGE".to_string()
+        "APPLICATION_IMAGE".to_string()
     } else {
         image
     };
