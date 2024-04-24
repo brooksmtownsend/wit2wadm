@@ -1,16 +1,16 @@
-# wit2wasm
+# wit2wadm
 
-wit2wasm is a tool for converting a WIT directory or a WebAssembly component into a deployable [wadm](https://github.com/wasmcloud/wadm) manifest.
+wit2wadm is a tool for converting a WIT directory or a WebAssembly component into a deployable [wadm](https://github.com/wasmcloud/wadm) manifest.
 
 ## Usage
 
-### 🏗 wit2wasm Library
+### 🏗 wit2wadm Library
 
-The majority of the logic for this conversion is included in the [wit2wasm crate](./crates/wit2wadm/). Primary usage comes from importing the `wit2wasm_lib::convert::component_to_wasm` function, which takes a `wit_parser::Resolve` and the name of a WIT world.
+The majority of the logic for this conversion is included in the [wit2wadm crate](./crates/wit2wadm/). Primary usage comes from importing the `wit2wadm_lib::convert::component_to_wasm` function, which takes a `wit_parser::Resolve` and the name of a WIT world.
 
 ⚠️️ The API is extremely experimental, so expect breaking changes if you're using the library directly.
 
-### 🏃 wit2wasm CLI
+### 🏃 wit2wadm CLI
 
 You can run the basic conversion from a WIT directory to a Wadm manifest by running the binary:
 
@@ -23,7 +23,7 @@ cargo run -- ./hello/wit hello
 
 🔮 In the future, this CLI will include support for passing a component directly instead of a WIT directory and world name.
 
-### 🐢 wit2wasm Component
+### 🐢 wit2wadm Component
 
 You can build a component that is capable of interpreting a WebAssembly component and returning a Wadm manifest by running `wash build`.
 
@@ -31,7 +31,7 @@ You can build a component that is capable of interpreting a WebAssembly componen
 
 ### 🌐 Web User Interface
 
-Packaged in the [docs](./docs/) directory is a basic user interface that allows you to drag-and-drop a WebAssembly component and execute the `wit2wasm` component in the browser.
+Packaged in the [docs](./docs/) directory is a basic user interface that allows you to drag-and-drop a WebAssembly component and execute the `wit2wadm` component in the browser.
 
 In order to run the UI, simply execute the script or the commands contained in [`./ui.sh`](./ui.sh). You will need [wash](https://wasmcloud.com/docs/installation), [jco](https://github.com/bytecodealliance/jco), and a Python3 installation to run the script.
 

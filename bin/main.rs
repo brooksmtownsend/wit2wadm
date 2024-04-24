@@ -6,7 +6,7 @@ use wit2wadm::{wit2wadm_from_component, wit2wadm_from_folder};
 
 #[derive(Parser)]
 #[clap(author = "wasmCloud", arg_required_else_help = true)]
-/// wit2wasm is a tool for converting a WIT directory or a WebAssembly component into a deployable https://github.com/wasmcloud/wadm manifests.
+/// wit2wadm is a tool for converting a WIT directory or a WebAssembly component into a deployable https://github.com/wasmcloud/wadm manifests.
 /// Either supply a WIT folder and a world name or a WebAssembly component and the resulting manifest will be printed to stdout.
 /// See https://github.com/brooksmtownsend/wit2wadm for more information.
 struct Args {
