@@ -21,8 +21,6 @@ You can run the basic conversion from a WIT directory to a Wadm manifest by runn
 cargo run -- ./hello/wit hello
 ```
 
-🔮 In the future, this CLI will include support for passing a component directly instead of a WIT directory and world name.
-
 ### 🐢 wit2wadm Component
 
 You can build a component that is capable of interpreting a WebAssembly component and returning a Wadm manifest by running `wash build`.
