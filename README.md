@@ -6,7 +6,7 @@ wit2wadm is a tool for converting a WIT directory or a WebAssembly component int
 
 ### 🏗 wit2wadm Library
 
-The majority of the logic for this conversion is included in the [wit2wadm crate](./crates/wit2wadm/). Primary usage comes from importing the `wit2wadm_lib::convert::component_to_wasm` function, which takes a `wit_parser::Resolve` and the name of a WIT world.
+The majority of the logic for this conversion is included in the [wit2wadm crate](./crates/wit2wadm/). Primary usage comes from importing the `wit2wadm::component_to_wasm` function, which takes a `wit_parser::Resolve` and the name of a WIT world.
 
 ⚠️️ The API is extremely experimental, so expect breaking changes if you're using the library directly.
 
