@@ -1,19 +1,6 @@
 package wasmcloud:tools;
 
 interface convert {
-  variant known-kind {
-    component,
-    provider,
-  }
-
-  record known-interface {
-    wit-namespace: string,
-    wit-package: string,
-    interfaces: list<string>,
-    kind: known-kind,
-    image-ref: string,
-  }
-
   component-to-wadm: func(component: list<u8>, name: string, version: string, description: string, image: string) -> result<string, string>;
 }
 
