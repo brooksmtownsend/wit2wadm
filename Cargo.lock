@@ -3,6 +3,18 @@
 version = 3
 
 [[package]]
+name = "ahash"
+version = "0.8.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e89da841a80418a9b391ebaea17f5c112ffaaa96f621d2c285b5174da76b9011"
+dependencies = [
+ "cfg-if",
+ "once_cell",
+ "version_check",
+ "zerocopy",
+]
+
+[[package]]
 name = "anstream"
 version = "0.6.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -63,6 +75,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf4b9d6a944f767f8e5e0db018570623c85f3d925ac718db4e06d0187adb21c1"
 
 [[package]]
+name = "cfg-if"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+
+[[package]]
 name = "clap"
 version = "4.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -119,6 +137,9 @@ name = "hashbrown"
 version = "0.14.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
+dependencies = [
+ "ahash",
+]
 
 [[package]]
 name = "heck"
@@ -169,6 +190,12 @@ name = "log"
 version = "0.4.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90ed8c1e510134f979dbc4f070f87d4313098b704861a105fe34231c70a3901c"
+
+[[package]]
+name = "once_cell"
+version = "1.19.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
 
 [[package]]
 name = "proc-macro2"
@@ -307,6 +334,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "711b9620af191e0cdc7468a8d14e709c3dcdb115b36f838e601583af800a370a"
 
 [[package]]
+name = "version_check"
+version = "0.9.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
+
+[[package]]
 name = "wadm"
 version = "0.11.0"
 source = "git+https://github.com/wasmcloud/wadm?branch=feat/gate-by-feature-flag#9cc471d1063287de5d5e27bb4f7ef98ac88d1ded"
@@ -328,9 +361,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-encoder"
-version = "0.205.0"
+version = "0.207.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "90e95b3563d164f33c1cfb0a7efbd5940c37710019be10cd09f800fdec8b0e5c"
+checksum = "d996306fb3aeaee0d9157adbe2f670df0236caf19f6728b221e92d0f27b3fe17"
 dependencies = [
  "leb128",
 ]
@@ -353,9 +386,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-metadata"
-version = "0.205.0"
+version = "0.207.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e9855ad6dd4d099fa8505f01fb0b84c7e3efd5f555207329e3ad938d5f394fe7"
+checksum = "b2c44e62d325ce9253f88c01f0f67be121356767d12f2f13e701fdcd99e1f5b0"
 dependencies = [
  "anyhow",
  "indexmap",
@@ -363,8 +396,8 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "spdx",
- "wasm-encoder 0.205.0",
- "wasmparser 0.205.0",
+ "wasm-encoder 0.207.0",
+ "wasmparser 0.207.0",
 ]
 
 [[package]]
@@ -380,11 +413,26 @@ dependencies = [
 
 [[package]]
 name = "wasmparser"
-version = "0.205.0"
+version = "0.206.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d457bb52804242e09d55a306e53ddbc65d1d29ed83db6a4eea3ed412ee0cfdf"
+checksum = "39192edb55d55b41963db40fd49b0b542156f04447b5b512744a91d38567bdbc"
 dependencies = [
+ "ahash",
  "bitflags",
+ "hashbrown",
+ "indexmap",
+ "semver",
+]
+
+[[package]]
+name = "wasmparser"
+version = "0.207.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e19bb9f8ab07616da582ef8adb24c54f1424c7ec876720b7da9db8ec0626c92c"
+dependencies = [
+ "ahash",
+ "bitflags",
+ "hashbrown",
  "indexmap",
  "semver",
 ]
@@ -540,9 +588,9 @@ dependencies = [
 
 [[package]]
 name = "wit-component"
-version = "0.205.0"
+version = "0.207.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "74841e17b2c2bfbd8ca8c45190ef85dff1c5e8659f0e2d164802ffc87dfb18c3"
+checksum = "a411ff9c471737091b2c1a738a25031029fc4d0b8f1a60bef0e68906e9f6534b"
 dependencies = [
  "anyhow",
  "bitflags",
@@ -551,10 +599,10 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "wasm-encoder 0.205.0",
- "wasm-metadata 0.205.0",
- "wasmparser 0.205.0",
- "wit-parser 0.205.0",
+ "wasm-encoder 0.207.0",
+ "wasm-metadata 0.207.0",
+ "wasmparser 0.207.0",
+ "wit-parser 0.207.0",
 ]
 
 [[package]]
@@ -577,9 +625,9 @@ dependencies = [
 
 [[package]]
 name = "wit-parser"
-version = "0.205.0"
+version = "0.207.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a3db34c7688c161ed7bd1b2f8055dca9fb2c15201db58754e9c48a0805f32e5f"
+checksum = "78c83dab33a9618d86cfe3563cc864deffd08c17efc5db31a3b7cd1edeffe6e1"
 dependencies = [
  "anyhow",
  "id-arena",
@@ -590,7 +638,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "unicode-xid",
- "wasmparser 0.205.0",
+ "wasmparser 0.207.0",
 ]
 
 [[package]]
@@ -598,11 +646,12 @@ name = "wit2wadm"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "clap",
  "serde_yaml",
  "wadm",
- "wasmparser 0.205.0",
- "wit-component 0.205.0",
- "wit-parser 0.205.0",
+ "wasmparser 0.206.0",
+ "wit-component 0.207.0",
+ "wit-parser 0.207.0",
 ]
 
 [[package]]
@@ -613,7 +662,39 @@ dependencies = [
  "clap",
  "serde_yaml",
  "wit-bindgen",
- "wit-component 0.205.0",
- "wit-parser 0.205.0",
+ "wit-component 0.207.0",
+ "wit-parser 0.207.0",
  "wit2wadm",
+]
+
+[[package]]
+name = "wit2wadm-plugin"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "indexmap",
+ "serde_yaml",
+ "wit-bindgen",
+ "wit-parser 0.207.0",
+ "wit2wadm",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74d4d3961e53fa4c9a25a8637fc2bfaf2595b3d3ae34875568a5cf64787716be"
+dependencies = [
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9ce1b18ccd8e73a9321186f97e46f9f04b778851177567b1975109d26a08d2a6"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]

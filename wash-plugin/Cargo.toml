@@ -1,0 +1,15 @@
+[package]
+name = "wit2wadm-plugin"
+edition = "2021"
+version = "0.1.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+clap = { workspace = true }
+indexmap = "2"
+serde_yaml = { workspace = true }
+wit-bindgen = { workspace = true }
+wit-parser = { workspace = true }
+wit2wadm = { path = "../crates/wit2wadm", features = ["cli"] }

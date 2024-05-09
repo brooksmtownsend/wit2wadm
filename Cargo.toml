@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace]
-members = ["crates/wit2wadm"]
+members = ["crates/wit2wadm", "wash-plugin"]
 
 [lib]
 name = "wit2wadm_component"
@@ -15,16 +15,19 @@ path = "src/lib.rs"
 name = "wit2wadm"
 path = "bin/main.rs"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [workspace.dependencies]
-wit-parser = "0.205.0"
+anyhow = "1.0.82"
+clap = { version = "4.5.4", features = ["derive"] }
+serde_yaml = "0.9"
+wit-bindgen = "0.24.0"
+wit-component = "0.207.0"
+wit-parser = "0.207.0"
 
 [dependencies]
-wit2wadm = { path = "./crates/wit2wadm" }
-wit-bindgen = "0.24.0"
+anyhow = { workspace = true }
+clap = { workspace = true }
+serde_yaml = { workspace = true }
+wit-component = { workspace = true }
 wit-parser = { workspace = true }
-wit-component = "0.205.0"
-serde_yaml = "0.9.34"
-clap = { version = "4.5.4", features = ["derive"] }
-anyhow = "1.0.82"
+wit-bindgen = { workspace = true }
+wit2wadm = { path = "./crates/wit2wadm", features = ["cli"] }
