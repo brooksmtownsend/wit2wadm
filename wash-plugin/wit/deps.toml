@@ -1,0 +1,2 @@
+subcommand = "https://github.com/wasmCloud/wasmCloud/releases/download/wash-plugin-v0.1.0/wash-plugins-0.1.0.tar.gz"
+cli = "https://github.com/WebAssembly/wasi-cli/archive/v0.2.0.tar.gz"
