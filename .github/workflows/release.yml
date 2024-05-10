@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         project:
-          - name: plugin
+          - name: wit2wadm
             project-dir: ./wash-plugin
             artifact: wit2wadm_plugin_s.wasm
             subject-key: WASH_PLUGIN_SUBJECT_KEY
