@@ -1,0 +1,45 @@
+name: Rust CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        project:
+          - name: plugin
+            project-dir: ./wash-plugin
+            artifact: wit2wadm_plugin_s.wasm
+            subject-key: WASH_PLUGIN_SUBJECT_KEY
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - uses: wasmCloud/common-actions/install-wash@main
+      - name: Install wasm32-wasi
+        run: rustup target add wasm32-wasi
+      - name: Build
+        env:
+          WASH_ISSUER_KEY: ${{ secrets.WASH_ISSUER_KEY }}
+        run: |
+          cd ${{ matrix.project.project-dir }}
+          export WASH_SUBJECT_KEY=${{ secrets[matrix.project.subject-key] }}
+          wash build
+      - name: Push
+        env:
+          WASH_REG_USER: brooksmtownsend
+          WASH_REG_PASSWORD: ${{ github.token }}
+        run: |
+          version=$(cargo metadata --no-deps |jq -r '.packages[0].version')
+          wash push ghcr.io/brooksmtownsend/${{ matrix.project.name }}:canary ${{ matrix.project.project-dir }}/build/${{ matrix.project.artifact }}
+          wash push ghcr.io/brooksmtownsend/${{ matrix.project.name }}:$version ${{ matrix.project.project-dir }}/build/${{ matrix.project.artifact }}
