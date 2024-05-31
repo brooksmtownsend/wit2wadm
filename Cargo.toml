@@ -1,6 +1,6 @@
 [package]
 name = "wit2wadm-cli"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [workspace]
@@ -19,9 +19,9 @@ path = "bin/main.rs"
 anyhow = "1.0.82"
 clap = { version = "4.5.4", features = ["derive"] }
 serde_yaml = "0.9"
-wit-bindgen = "0.24.0"
-wit-component = "0.207.0"
-wit-parser = "0.207.0"
+wit-bindgen = "0.26"
+wit-component = "0.209"
+wit-parser = "0.209"
 
 [dependencies]
 anyhow = { workspace = true }
