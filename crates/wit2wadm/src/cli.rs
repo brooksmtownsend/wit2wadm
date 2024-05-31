@@ -21,7 +21,7 @@ pub struct Args {
     #[clap(long = "description")]
     pub app_description: Option<String>,
     /// The version of the application to use in the manifest
-    #[clap(long = "version")]
+    #[clap(long = "app-version")]
     pub app_version: Option<String>,
     /// The image to use in the manifest
     #[clap(long = "image")]
