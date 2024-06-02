@@ -1,6 +1,6 @@
 [package]
 name = "wit2wadm-cli"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 
 [workspace]
@@ -31,3 +31,9 @@ wit-component = { workspace = true }
 wit-parser = { workspace = true }
 wit-bindgen = { workspace = true }
 wit2wadm = { path = "./crates/wit2wadm", features = ["cli"] }
+
+[profile.release]
+# Optimize for small code size
+lto = true
+opt-level = "s"
+strip = true
